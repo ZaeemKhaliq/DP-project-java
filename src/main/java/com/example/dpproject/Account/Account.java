@@ -1,7 +1,6 @@
 package com.example.dpproject.Account;
 
 public class Account {
-    private String[] accountTypes = {"Young Saver", "Current"};
     private String accountType;
     private String name;
     private String fatherName;
@@ -10,10 +9,6 @@ public class Account {
     private int age;
 
     public Account(){}
-
-    public String[] getAccountTypes(){
-        return this.accountTypes;
-    }
 
     public void setName(String name){
         this.name = name;
