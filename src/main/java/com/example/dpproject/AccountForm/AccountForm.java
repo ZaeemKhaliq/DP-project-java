@@ -1,6 +1,6 @@
-package com.example.dpproject.Account;
+package com.example.dpproject.AccountForm;
 
-public class Account {
+public class AccountForm {
     private String accountType;
     private String name;
     private String fatherName;
@@ -8,7 +8,7 @@ public class Account {
     private String cnicNum;
     private int age;
 
-    public Account(){}
+    public AccountForm(){}
 
     public void setName(String name){
         this.name = name;

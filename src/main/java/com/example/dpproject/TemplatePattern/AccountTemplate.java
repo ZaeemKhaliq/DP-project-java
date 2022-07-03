@@ -1,12 +1,13 @@
 package com.example.dpproject.TemplatePattern;
 
-import com.example.dpproject.Account.Account;
-import com.example.dpproject.SingletonPattern.AccountTypes;
+import com.example.dpproject.SingletonPattern.Account;
+import com.example.dpproject.AccountForm.AccountForm;
+import com.example.dpproject.Constants.AccountTypes;
 
 public abstract class AccountTemplate {
-    protected Account account;
-    protected Account templateAccount;
-    protected String[] accountTypes = AccountTypes.getInstance().getAccountTypes();
+    protected AccountForm accountForm;
+    protected Account templateAccount = Account.getAccountInstance();
+    protected String[] accountTypes = AccountTypes.accountTypes;
 
     public Account createAccount(){
         setName();
@@ -21,23 +22,23 @@ public abstract class AccountTemplate {
     };
 
     public void setName(){
-        this.templateAccount.setName(this.account.getName());
+        this.templateAccount.setName(this.accountForm.getName());
     }
 
     public void setFatherName(){
-        this.templateAccount.setFatherName(this.account.getFatherName());
+        this.templateAccount.setFatherName(this.accountForm.getFatherName());
     }
 
     public void setAddress(){
-        this.templateAccount.setAddress(this.account.getAddress());
+        this.templateAccount.setAddress(this.accountForm.getAddress());
     }
 
     public void setCnicNum(){
-        this.templateAccount.setCnicNum(this.account.getCnicNum());
+        this.templateAccount.setCnicNum(this.accountForm.getCnicNum());
     }
 
     public void setAge(){
-        this.templateAccount.setAge(this.account.getAge());
+        this.templateAccount.setAge(this.accountForm.getAge());
     }
 
     public abstract void setAccountType();

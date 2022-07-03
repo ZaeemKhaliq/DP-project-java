@@ -1,35 +1,35 @@
 package com.example.dpproject.BuilderPattern;
 
-import com.example.dpproject.Account.Account;
+import com.example.dpproject.AccountForm.AccountForm;
 
 public class AccountBuilder {
-    private Account account;
+    private AccountForm accountForm;
 
     public AccountBuilder(){
-        this.account = new Account();
+        this.accountForm = new AccountForm();
     }
 
     public void setName(String name){
-        account.setName(name);
+        accountForm.setName(name);
     }
 
     public void setFatherName(String fatherName){
-        account.setFatherName(fatherName);
+        accountForm.setFatherName(fatherName);
     }
 
     public void setAddress(String address){
-        account.setAddress(address);
+        accountForm.setAddress(address);
     }
 
     public void setCnicNum(String cnicNum){
-        account.setCnicNum(cnicNum);
+        accountForm.setCnicNum(cnicNum);
     }
 
     public void setAge(int age){
-        account.setAge(age);
+        accountForm.setAge(age);
     }
 
-    public Account getAccount(){
-        return this.account;
+    public AccountForm getAccount(){
+        return this.accountForm;
     }
 }
