@@ -1,4 +1,4 @@
-package com.example.dpproject.BankCard;
+package com.example.dpproject.Entities.BankCard;
 
 import com.example.dpproject.SingletonPattern.Account;
 
@@ -7,14 +7,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class SilverCreditCard extends CreditCard {
-    private Account account;
-    private String cardHolderName;
-    private UUID cardNumber;
-    private String expiryDate;
-    private double creditLimit = 20000;
+public class GoldCreditCard extends CreditCard {
+    private double creditLimit = 25000;
 
-    public SilverCreditCard(Account account){
+    public GoldCreditCard(Account account){
         this.account = account;
         this.cardHolderName = account.getName();
         this.cardNumber = UUID.randomUUID();

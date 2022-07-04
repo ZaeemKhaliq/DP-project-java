@@ -1,4 +1,4 @@
-package com.example.dpproject.BankCard;
+package com.example.dpproject.Entities.BankCard;
 
 import com.example.dpproject.SingletonPattern.Account;
 
@@ -7,14 +7,14 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class SilverDebitCard extends DebitCard {
+public class SilverCreditCard extends CreditCard {
     private Account account;
     private String cardHolderName;
     private UUID cardNumber;
     private String expiryDate;
-    private double debitLimit = 20000;
+    private double creditLimit = 20000;
 
-    public SilverDebitCard(Account account){
+    public SilverCreditCard(Account account){
         this.account = account;
         this.cardHolderName = account.getName();
         this.cardNumber = UUID.randomUUID();
@@ -31,16 +31,16 @@ public class SilverDebitCard extends DebitCard {
         this.expiryDate = cardExpiryDate;
     }
 
-    public void checkDebit(){
-        System.out.println("Checking debit...");
+    public void checkCredit(){
+        System.out.println("Checking credit...");
 
-        double debit = this.account.getBalance();
+        double credit = this.account.getBalance();
 
-        System.out.println("Your debit is: " + debit);
+        System.out.println("Your credit is: " + credit);
     }
 
-    public void checkDebitLimit(){
-        System.out.println("Your debit limit is: " + this.debitLimit);
+    public void checkCreditLimit(){
+        System.out.println("Your credit limit is: " + this.creditLimit);
     }
 
     public HashMap<String, String> getCardDetails(){
@@ -49,12 +49,12 @@ public class SilverDebitCard extends DebitCard {
         String cardHolderName = this.cardHolderName;
         String cardNumber = this.cardNumber.toString();
         String cardExpiryDate = this.expiryDate;
-        String debitLimit = Double.toString(this.debitLimit);
+        String creditLimit = Double.toString(this.creditLimit);
 
         cardDetails.put("Card Holder",cardHolderName);
         cardDetails.put("Card Number",cardNumber);
         cardDetails.put("Expiry Date",cardExpiryDate);
-        cardDetails.put("Debit Limit",debitLimit);
+        cardDetails.put("Credit Limit",creditLimit);
 
         return cardDetails;
 

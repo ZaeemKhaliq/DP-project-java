@@ -1,5 +1,13 @@
 package com.example.dpproject.SingletonPattern;
 
+import com.example.dpproject.Entities.Transaction.Transaction;
+import com.example.dpproject.ObserverPattern.Publisher;
+import com.example.dpproject.ObserverPattern.Subscriber;
+import com.example.dpproject.StrategyPattern.CurrencyContext;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class Account {
@@ -10,12 +18,17 @@ public class Account {
     private String address;
     private String cnicNum;
     private int age;
-    private double balance;
     private UUID accountNumber;
+    private double balance;
+    private String currencyUnit;
+
+    private List<Transaction> transactions = new ArrayList<>();
+    private Publisher publisher = new Publisher();
 
     private Account(){
-        this.balance = 0;
         this.accountNumber = UUID.randomUUID();
+        this.balance = 5;
+        this.currencyUnit = CurrencyContext.getCurrencyUnit();
     }
 
     public static Account getAccountInstance(){
@@ -74,8 +87,47 @@ public class Account {
     public double getBalance(){
         return this.balance;
     }
+    public void changeBalanceCurrencyType(){
+        double currentBalance = this.balance;
+
+        String currentCurrencyUnit = this.currencyUnit;
+        String newCurrencyUnit = CurrencyContext.getCurrencyUnit();
+
+        String CurrencyPair = currentCurrencyUnit + "_" + newCurrencyUnit;
+
+        double conversionFactor = CurrencyContext.currencyConversionRates.get(CurrencyPair);
+
+        double newBalance = currentBalance * conversionFactor;
+
+        this.balance = newBalance;
+        this.currencyUnit = CurrencyContext.getCurrencyUnit();
+    }
 
     public UUID getAccountNumber(){
         return this.accountNumber;
     }
+
+    public void addSubscriber(String eventType,Subscriber subscriber){
+        publisher.subscribe(eventType,subscriber);
+    }
+    public void removeSubscriber(String eventType, Subscriber subscriber){
+        publisher.unsubscribe(eventType, subscriber);
+    }
+
+    public void addTransaction(Transaction transaction){
+        try{
+            transactions.add(transaction);
+
+            publisher.notifyAllSubscribers("Transaction successful!");
+        }
+        catch (Exception e){
+            publisher.notifyAllSubscribers("Transaction unsuccessful!");
+        }
+
+    }
+    public List<Transaction> getTransactions(){
+        return this.transactions;
+    }
+
+
 }

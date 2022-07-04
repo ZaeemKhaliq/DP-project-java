@@ -1,6 +1,6 @@
 package com.example.dpproject.BuilderPattern;
 
-import com.example.dpproject.AccountForm.AccountForm;
+import com.example.dpproject.Entities.AccountForm.AccountForm;
 
 public class AccountBuilder {
     private AccountForm accountForm;

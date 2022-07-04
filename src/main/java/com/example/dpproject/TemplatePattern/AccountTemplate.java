@@ -1,7 +1,7 @@
 package com.example.dpproject.TemplatePattern;
 
 import com.example.dpproject.SingletonPattern.Account;
-import com.example.dpproject.AccountForm.AccountForm;
+import com.example.dpproject.Entities.AccountForm.AccountForm;
 import com.example.dpproject.Constants.AccountTypes;
 
 public abstract class AccountTemplate {

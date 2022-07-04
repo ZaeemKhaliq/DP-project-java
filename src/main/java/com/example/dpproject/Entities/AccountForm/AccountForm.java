@@ -1,7 +1,6 @@
-package com.example.dpproject.AccountForm;
+package com.example.dpproject.Entities.AccountForm;
 
 public class AccountForm {
-    private String accountType;
     private String name;
     private String fatherName;
     private String address;
@@ -45,10 +44,4 @@ public class AccountForm {
         return this.age;
     }
 
-    public void setAccountType(String accountType){
-        this.accountType = accountType;
-    }
-    public String getAccountType(){
-        return this.accountType;
-    }
 }

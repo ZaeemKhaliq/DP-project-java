@@ -1,7 +1,10 @@
 package com.example.dpproject.AbstractFactoryPattern;
 
+import com.example.dpproject.Entities.BankCard.CreditCard;
+import com.example.dpproject.Entities.BankCard.DebitCard;
+import com.example.dpproject.Entities.BankCard.SilverCreditCard;
+import com.example.dpproject.Entities.BankCard.SilverDebitCard;
 import com.example.dpproject.SingletonPattern.Account;
-import com.example.dpproject.BankCard.*;
 
 public class SilverCardFactory implements BankCardFactory {
     public CreditCard createCreditCard(Account account){

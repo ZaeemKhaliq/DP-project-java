@@ -1,4 +1,4 @@
-package com.example.dpproject.BankCard;
+package com.example.dpproject.Entities.BankCard;
 
 import com.example.dpproject.SingletonPattern.Account;
 

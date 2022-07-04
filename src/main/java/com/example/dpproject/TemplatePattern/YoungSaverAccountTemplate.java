@@ -1,6 +1,6 @@
 package com.example.dpproject.TemplatePattern;
 
-import com.example.dpproject.AccountForm.AccountForm;
+import com.example.dpproject.Entities.AccountForm.AccountForm;
 
 public class YoungSaverAccountTemplate extends AccountTemplate {
 
