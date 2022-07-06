@@ -3,7 +3,6 @@ package com.example.dpproject.StrategyPattern;
 import com.example.dpproject.SingletonPattern.Account;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class CurrencyContext {
     public static CurrencyTypeStrategy currencyTypeStrategy = new USDCurrencyTypeStrategy();

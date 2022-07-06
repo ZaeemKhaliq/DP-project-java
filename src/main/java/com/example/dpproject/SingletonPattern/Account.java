@@ -29,6 +29,7 @@ public class Account {
         this.accountNumber = UUID.randomUUID();
         this.balance = 5;
         this.currencyUnit = CurrencyContext.getCurrencyUnit();
+        System.out.println("Currency Unit: " + this.currencyUnit);
     }
 
     public static Account getAccountInstance(){
@@ -37,6 +38,14 @@ public class Account {
         }
 
         return instance;
+    }
+
+    public static boolean checkInstance(){
+        if(instance == null){
+            return false;
+        }
+
+        return true;
     }
 
     public void setName(String name){
@@ -81,6 +90,10 @@ public class Account {
         return this.accountType;
     }
 
+    public UUID getAccountNumber(){
+        return this.accountNumber;
+    }
+
     public void setBalance(double balance){
         this.balance = balance;
     }
@@ -103,8 +116,8 @@ public class Account {
         this.currencyUnit = CurrencyContext.getCurrencyUnit();
     }
 
-    public UUID getAccountNumber(){
-        return this.accountNumber;
+    public String getCurrencyUnit(){
+        return this.currencyUnit;
     }
 
     public void addSubscriber(String eventType,Subscriber subscriber){

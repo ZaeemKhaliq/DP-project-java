@@ -17,7 +17,7 @@ public class Transaction {
     private double finalAmount;
 
     public Transaction(String senderAccountNumber, String receiverAccountNumber,
-                       int amount){
+                       double amount){
         this.transactionId = UUID.randomUUID();
         this.transactionDate = LocalDateTime.now();
         this.senderAccountNumber = senderAccountNumber;
@@ -28,7 +28,32 @@ public class Transaction {
         this.finalAmount = amount - (amount * this.taxRate);
     }
 
-    public HashMap<String, String> getTransactionDetails(){
+    public UUID getTransactionId(){
+        return this.transactionId;
+    }
+    public LocalDateTime getTransactionDate(){
+        return this.transactionDate;
+    }
+    public String getSenderAccountNumber(){
+        return this.senderAccountNumber;
+    }
+    public String getReceiverAccountNumber(){
+        return this.receiverAccountNumber;
+    }
+    public double getAmount(){
+        return this.amount;
+    }
+    public String getTransactionCurrencyUnit(){
+        return this.transactionCurrencyUnit;
+    }
+    public double getTaxRate(){
+        return this.taxRate;
+    }
+    public double getFinalAmount(){
+        return this.finalAmount;
+    }
+
+    public HashMap<String, String> transactionDetails(){
         HashMap<String, String> details = new HashMap<String, String>();
 
         String tId = this.transactionId.toString();

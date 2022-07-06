@@ -51,10 +51,11 @@ public class SilverCreditCard extends CreditCard {
         String cardExpiryDate = this.expiryDate;
         String creditLimit = Double.toString(this.creditLimit);
 
-        cardDetails.put("Card Holder",cardHolderName);
-        cardDetails.put("Card Number",cardNumber);
-        cardDetails.put("Expiry Date",cardExpiryDate);
-        cardDetails.put("Credit Limit",creditLimit);
+        cardDetails.put("cardType","Credit Silver");
+        cardDetails.put("cardHolder",cardHolderName);
+        cardDetails.put("cardNumber",cardNumber);
+        cardDetails.put("expiryDate",cardExpiryDate);
+        cardDetails.put("creditLimit",creditLimit);
 
         return cardDetails;
 
