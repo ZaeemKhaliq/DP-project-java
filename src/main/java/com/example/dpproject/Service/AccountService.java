@@ -3,6 +3,8 @@ package com.example.dpproject.Service;
 import com.example.dpproject.BuilderPattern.AccountBuilder;
 import com.example.dpproject.Entities.AccountForm.AccountForm;
 import com.example.dpproject.Entities.Transaction.Transaction;
+import com.example.dpproject.ObserverPattern.EmailSubscriber;
+import com.example.dpproject.ObserverPattern.SmsSubscriber;
 import com.example.dpproject.SingletonPattern.Account;
 import com.example.dpproject.StrategyPattern.CurrencyContext;
 import com.example.dpproject.StrategyPattern.EURCurrencyTypeStrategy;
@@ -95,6 +97,27 @@ public class AccountService {
         }
 
         return "ERROR. Currency unit not available.";
+    }
+
+    public String addSubscriber(String type){
+        Account account = Account.getAccountInstance();
+
+        if(Objects.equals(type,"email")){
+            EmailSubscriber emailSubscriber = new EmailSubscriber("abc@xyz.com");
+
+            account.addSubscriber("email",emailSubscriber);
+
+            return "Email subscription added successfull!";
+        }
+        if(Objects.equals(type,"sms")){
+            SmsSubscriber smsSubscriber = new SmsSubscriber("03331114785");
+
+            account.addSubscriber("sms",smsSubscriber);
+
+            return "SMS subscription added successfull!";
+        }
+
+        return "Invalid subscription type";
     }
 
     public String addTransaction(Transaction transaction){

@@ -5,19 +5,13 @@ import com.example.dpproject.Entities.Transaction.Transaction;
 import com.example.dpproject.Service.AccountService;
 import com.example.dpproject.SingletonPattern.Account;
 import com.example.dpproject.StrategyPattern.CurrencyContext;
-import com.example.dpproject.StrategyPattern.EURCurrencyTypeStrategy;
-import com.example.dpproject.StrategyPattern.PKRCurrencyTypeStrategy;
-import com.example.dpproject.StrategyPattern.USDCurrencyTypeStrategy;
-import com.example.dpproject.TemplatePattern.CurrentAccountTemplate;
-import com.example.dpproject.TemplatePattern.YoungSaverAccountTemplate;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Objects;
 
 @RequestMapping("api/v1/account")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class AccountController {
 
@@ -154,6 +148,11 @@ public class AccountController {
         }
 
         return accountService.changeCurrencyUnit(currencyUnit);
+    }
+
+    @PostMapping(path = "addSubscriber/{type}")
+    public String addSubscriber(@PathVariable("type") String type){
+        return accountService.addSubscriber(type);
     }
 
     @PostMapping(path = "makeTransaction")
