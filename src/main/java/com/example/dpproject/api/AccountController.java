@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RequestMapping("api/v1/account")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://dpproject-react.herokuapp.com")
 @RestController
 public class AccountController {
 
