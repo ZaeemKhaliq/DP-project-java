@@ -288,7 +288,7 @@ public class AccountController {
         HashMap<String, String> cardDetails = currentDebitCard.getCardDetails();
         String cardVariant = cardDetails.get("cardVariant");
 
-        if(Objects.equals(cardVariant,variant)){
+        if(Objects.equals(cardVariant.toLowerCase(),variant)){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You already have that variant.\nPlease try a different one.");
         }
 
