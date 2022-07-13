@@ -11,4 +11,8 @@ public class CurrentAccountTemplate  extends AccountTemplate{
         String currentAccount = this.accountTypes[1];
         this.templateAccount.setAccountType(currentAccount);
     }
+
+    public void setBalance(){
+        this.templateAccount.setBalance(5);
+    }
 }

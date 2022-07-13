@@ -51,7 +51,8 @@ public class SilverDebitCard extends DebitCard {
         String cardExpiryDate = this.expiryDate;
         String debitLimit = Double.toString(this.debitLimit);
 
-        cardDetails.put("cardType","Debit Silver");
+        cardDetails.put("cardType","Debit");
+        cardDetails.put("cardVariant","Silver");
         cardDetails.put("cardHolder",cardHolderName);
         cardDetails.put("cardNumber",cardNumber);
         cardDetails.put("expiryDate",cardExpiryDate);

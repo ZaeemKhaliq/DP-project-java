@@ -13,5 +13,7 @@ public class YoungSaverAccountTemplate extends AccountTemplate {
         this.templateAccount.setAccountType(youngSaverAccount);
     }
 
-
+    public void setBalance(){
+        this.templateAccount.setBalance(20);
+    }
 }

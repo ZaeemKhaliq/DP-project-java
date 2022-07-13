@@ -48,7 +48,8 @@ public class GoldDebitCard extends DebitCard {
         String cardExpiryDate = this.expiryDate;
         String debitLimit = Double.toString(this.debitLimit);
 
-        cardDetails.put("cardType","Debit Gold");
+        cardDetails.put("cardType","Debit");
+        cardDetails.put("cardVariant","Gold");
         cardDetails.put("cardHolder",cardHolderName);
         cardDetails.put("cardNumber",cardNumber);
         cardDetails.put("expiryDate",cardExpiryDate);

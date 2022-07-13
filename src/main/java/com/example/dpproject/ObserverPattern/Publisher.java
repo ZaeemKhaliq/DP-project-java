@@ -1,6 +1,8 @@
 package com.example.dpproject.ObserverPattern;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Publisher {
     private HashMap<String, Subscriber> subscribers;
@@ -17,17 +19,34 @@ public class Publisher {
         subscribers.remove(eventType, subscriber);
     }
 
-    public void notify(String eventType, String data){
-        for(String i: subscribers.keySet()){
-            if(i == eventType){
-                subscribers.get(i).update(data);
-            }
-        }
+    public Subscriber getSubscriber(String eventType){
+        Subscriber subscriber = this.subscribers.get(eventType);
+        return subscriber;
     }
 
-    public void notifyAllSubscribers(String data){
-        for(Subscriber subscriber: subscribers.values()){
-            subscriber.update(data);
+    public HashMap<String, Subscriber> getSubscribers(){
+        return this.subscribers;
+    }
+
+    public String notify(String eventType, String data){
+        String message = "Subscription doesn't exists";
+        for(String i: subscribers.keySet()){
+            if(i == eventType){
+                message = subscribers.get(i).update(data);
+            }
         }
+
+        return message;
+    }
+
+    public List<String> notifyAllSubscribers(String data){
+        List<String> messages = new ArrayList<>();
+
+        for(Subscriber subscriber: subscribers.values()){
+            String message = subscriber.update(data);
+            messages.add(message);
+        }
+
+        return messages;
     }
 }

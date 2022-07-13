@@ -10,14 +10,17 @@ public class CurrencyContext {
 
     static{
         currencyConversionRates = new HashMap<String, Double>();
-        currencyConversionRates.put("USD_PKR",204.5);
-        currencyConversionRates.put("PKR_USD",0.0049);
-        currencyConversionRates.put("EUR_PKR",213.2);
+        currencyConversionRates.put("USD_PKR",210.87);
+        currencyConversionRates.put("PKR_USD",0.0047);
+        currencyConversionRates.put("EUR_PKR",211.37);
         currencyConversionRates.put("PKR_EUR",0.0047);
-        currencyConversionRates.put("USD_EUR",0.96);
-        currencyConversionRates.put("EUR_USD",1.04);
+        currencyConversionRates.put("USD_EUR",1.00);
+        currencyConversionRates.put("EUR_USD",1.00);
     }
 
+    public static HashMap<String, Double> getCurrencyConversionRates(){
+        return CurrencyContext.currencyConversionRates;
+    }
 
     public static void setCurrencyTypeStrategy(CurrencyTypeStrategy currencyTypeStrategy){
         CurrencyContext.currencyTypeStrategy = currencyTypeStrategy;

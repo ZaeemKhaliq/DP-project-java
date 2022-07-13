@@ -7,11 +7,13 @@ public class EmailSubscriber implements Subscriber {
         this.email = email;
     }
 
-    public void update(String message){
-        System.out.println("Sending notification to following email: " + this.email);
-        System.out.println("...");
-        System.out.println("Notification sent successfully!");
-        System.out.println("Message sent:");
-        System.out.println(message);
+    public String getField(){
+        return this.email;
+    }
+
+    public String update(String message){
+        String notification = "Transaction notification sent to '" + this.email + "' successfully!\n\n" +
+                "Message sent: \"" + message + "\"";
+        return notification;
     }
 }

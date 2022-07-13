@@ -20,7 +20,12 @@ public class GoldCreditCard extends CreditCard {
     public void setCardExpiryDate(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM");
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DAY_OF_MONTH,30);
+
+        int min = 30;
+        int max=60;
+        int days = (int)Math.floor(Math.random()*(max-min+1)+min);
+
+        cal.add(Calendar.DAY_OF_MONTH,days);
 
         String cardExpiryDate = sdf.format(cal.getTime());
 
@@ -47,7 +52,8 @@ public class GoldCreditCard extends CreditCard {
         String cardExpiryDate = this.expiryDate;
         String creditLimit = Double.toString(this.creditLimit);
 
-        cardDetails.put("cardType","Credit Gold");
+        cardDetails.put("cardType","Credit");
+        cardDetails.put("cardVariant","Gold");
         cardDetails.put("cardHolder",cardHolderName);
         cardDetails.put("cardNumber",cardNumber);
         cardDetails.put("expiryDate",cardExpiryDate);

@@ -1,10 +1,15 @@
 package com.example.dpproject.SingletonPattern;
 
+import com.example.dpproject.Entities.BankCard.CreditCard;
+import com.example.dpproject.Entities.BankCard.DebitCard;
 import com.example.dpproject.Entities.Transaction.Transaction;
 import com.example.dpproject.ObserverPattern.Publisher;
+import com.example.dpproject.ObserverPattern.SmsSubscriber;
 import com.example.dpproject.ObserverPattern.Subscriber;
 import com.example.dpproject.StrategyPattern.CurrencyContext;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,16 +26,12 @@ public class Account {
     private UUID accountNumber;
     private double balance;
     private String currencyUnit;
-
     private List<Transaction> transactions = new ArrayList<>();
     private Publisher publisher = new Publisher();
+    private CreditCard creditCard;
+    private DebitCard debitCard;
 
-    private Account(){
-        this.accountNumber = UUID.randomUUID();
-        this.balance = 5;
-        this.currencyUnit = CurrencyContext.getCurrencyUnit();
-        System.out.println("Currency Unit: " + this.currencyUnit);
-    }
+    private Account(){}
 
     public static Account getAccountInstance(){
         if(instance == null){
@@ -90,6 +91,9 @@ public class Account {
         return this.accountType;
     }
 
+    public void setAccountNumber(UUID accountNumber){
+        this.accountNumber = accountNumber;
+    }
     public UUID getAccountNumber(){
         return this.accountNumber;
     }
@@ -110,12 +114,15 @@ public class Account {
 
         double conversionFactor = CurrencyContext.currencyConversionRates.get(CurrencyPair);
 
-        double newBalance = currentBalance * conversionFactor;
+        double newBalance = new BigDecimal( currentBalance * conversionFactor).setScale(2, RoundingMode.DOWN).doubleValue();
 
         this.balance = newBalance;
         this.currencyUnit = CurrencyContext.getCurrencyUnit();
     }
 
+    public void setCurrencyUnit(String currencyUnit){
+        this.currencyUnit = currencyUnit;
+    }
     public String getCurrencyUnit(){
         return this.currencyUnit;
     }
@@ -126,21 +133,86 @@ public class Account {
     public void removeSubscriber(String eventType, Subscriber subscriber){
         publisher.unsubscribe(eventType, subscriber);
     }
+    public Subscriber checkSubscriber(String eventType){
+        return this.publisher.getSubscriber(eventType);
+    }
 
-    public void addTransaction(Transaction transaction){
-        try{
-            transactions.add(transaction);
+    public List<String> addTransaction(Transaction transaction){
+        transactions.add(transaction);
 
-            publisher.notifyAllSubscribers("Transaction successful!");
-        }
-        catch (Exception e){
-            publisher.notifyAllSubscribers("Transaction unsuccessful!");
-        }
+        return publisher.notifyAllSubscribers("Transaction successful!");
+    }
 
+    public void setTransactions(List<Transaction> transactions){
+        this.transactions = transactions;
     }
     public List<Transaction> getTransactions(){
         return this.transactions;
     }
 
+    public void setPublisher(Publisher publisher){
+        this.publisher = publisher;
+    }
 
+    public HashMap<String, Object> getSubscriptions(){
+        class Subscription {
+            private String value;
+            private boolean isSubscribed;
+
+            public Subscription(String value, boolean isSubscribed){
+                this.value = value;
+                this.isSubscribed = isSubscribed;
+            }
+            public String getValue(){
+                return this.value;
+            }
+
+            public boolean getIsSubscribed(){
+                return this.isSubscribed;
+            }
+        }
+
+        HashMap<String, Object> areSubscribed = new HashMap<String, Object>();
+        HashMap<String, Subscriber> subscribers = this.publisher.getSubscribers();
+
+        Subscription subscription;
+
+        if(!subscribers.containsKey("sms")){
+            subscription = new Subscription("",false);
+
+            areSubscribed.put("sms",subscription);
+        }else{
+            Subscriber subscriber = subscribers.get("sms");
+            subscription = new Subscription(subscriber.getField(), true);
+
+            areSubscribed.put("sms",subscription);
+        }
+
+        if(!subscribers.containsKey("email")){
+            subscription = new Subscription("",false);
+
+            areSubscribed.put("email",subscription);
+        }else{
+            Subscriber subscriber = subscribers.get("email");
+            subscription = new Subscription(subscriber.getField(),true);
+
+            areSubscribed.put("email",subscription);
+        }
+
+        return areSubscribed;
+    }
+
+    public void setCreditCard(CreditCard creditCard){
+        this.creditCard = creditCard;
+    }
+    public CreditCard getCreditCard(){
+        return this.creditCard;
+    }
+
+    public void setDebitCard(DebitCard debitCard){
+        this.debitCard = debitCard;
+    }
+    public DebitCard getDebitCard(){
+        return this.debitCard;
+    }
 }

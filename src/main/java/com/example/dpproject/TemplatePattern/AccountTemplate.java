@@ -1,8 +1,13 @@
 package com.example.dpproject.TemplatePattern;
 
+import com.example.dpproject.ObserverPattern.Publisher;
 import com.example.dpproject.SingletonPattern.Account;
 import com.example.dpproject.Entities.AccountForm.AccountForm;
 import com.example.dpproject.Constants.AccountTypes;
+import com.example.dpproject.StrategyPattern.CurrencyContext;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 public abstract class AccountTemplate {
     protected AccountForm accountForm;
@@ -10,6 +15,8 @@ public abstract class AccountTemplate {
     protected String[] accountTypes = AccountTypes.accountTypes;
 
     public Account createAccount(){
+        initializeAccount();
+
         setName();
         setFatherName();
         setAddress();
@@ -17,9 +24,20 @@ public abstract class AccountTemplate {
         setAge();
 
         setAccountType();
+        setBalance();
 
         return this.templateAccount;
     };
+
+    public void initializeAccount(){
+        this.templateAccount.setAccountNumber(UUID.randomUUID());
+        this.templateAccount.setBalance(0);
+        this.templateAccount.setCurrencyUnit(CurrencyContext.getCurrencyUnit());
+        this.templateAccount.setTransactions(new ArrayList<>());
+        this.templateAccount.setPublisher(new Publisher());
+        this.templateAccount.setCreditCard(null);
+        this.templateAccount.setDebitCard(null);
+    }
 
     public void setName(){
         this.templateAccount.setName(this.accountForm.getName());
@@ -42,5 +60,6 @@ public abstract class AccountTemplate {
     }
 
     public abstract void setAccountType();
+    public abstract void setBalance();
 
 }

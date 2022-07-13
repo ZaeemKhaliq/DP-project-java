@@ -2,6 +2,8 @@ package com.example.dpproject.Entities.Transaction;
 
 import com.example.dpproject.StrategyPattern.CurrencyContext;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.UUID;
@@ -13,7 +15,7 @@ public class Transaction {
     private String receiverAccountNumber;
     private double amount;
     private String transactionCurrencyUnit;
-    private double taxRate;
+    private BigDecimal taxRate;
     private double finalAmount;
 
     public Transaction(String senderAccountNumber, String receiverAccountNumber,
@@ -24,8 +26,8 @@ public class Transaction {
         this.receiverAccountNumber = receiverAccountNumber;
         this.amount = amount;
         this.transactionCurrencyUnit = CurrencyContext.getCurrencyUnit();
-        this.taxRate = CurrencyContext.getTaxRate();
-        this.finalAmount = amount - (amount * this.taxRate);
+        this.taxRate = new BigDecimal(CurrencyContext.getTaxRate()).setScale(2,RoundingMode.DOWN);
+        this.finalAmount = amount - (amount * this.taxRate.doubleValue());
     }
 
     public UUID getTransactionId(){
@@ -46,8 +48,8 @@ public class Transaction {
     public String getTransactionCurrencyUnit(){
         return this.transactionCurrencyUnit;
     }
-    public double getTaxRate(){
-        return this.taxRate;
+    public String getTaxRate(){
+        return this.taxRate.toString();
     }
     public double getFinalAmount(){
         return this.finalAmount;
@@ -62,7 +64,7 @@ public class Transaction {
         String receiverAccountNumber = this.receiverAccountNumber;
         String amount = Double.toString(this.amount);
         String transactionCurrencyUnit = this.transactionCurrencyUnit;
-        String taxRate = Double.toString(this.taxRate);
+        String taxRate = this.taxRate.toString();
         String finalAmount = Double.toString(this.finalAmount);
 
         details.put("transactionId",tId);

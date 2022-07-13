@@ -7,11 +7,13 @@ public class SmsSubscriber implements Subscriber {
         this.smsNumber = smsNumber;
     }
 
-    public void update(String message){
-        System.out.println("Sending notification on the following number: " + this.smsNumber);
-        System.out.println("...");
-        System.out.println("Notification sent successfully!");
-        System.out.println("Message sent:");
-        System.out.println(message);
+    public String getField(){
+        return this.smsNumber;
+    }
+
+    public String update(String message){
+        String notification = "Transaction notification sent to '" + this.smsNumber + "' successfully!\n\n" +
+                "Message sent: \"" + message + "\"";
+        return notification;
     }
 }
