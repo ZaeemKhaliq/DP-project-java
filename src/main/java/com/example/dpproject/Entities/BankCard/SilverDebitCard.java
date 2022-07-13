@@ -24,7 +24,12 @@ public class SilverDebitCard extends DebitCard {
     public void setCardExpiryDate(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM");
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DAY_OF_MONTH,30);
+
+        int min = 30;
+        int max=60;
+        int days = (int)Math.floor(Math.random()*(max-min+1)+min);
+
+        cal.add(Calendar.DAY_OF_MONTH,days);
 
         String cardExpiryDate = sdf.format(cal.getTime());
 
